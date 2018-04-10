@@ -9,6 +9,16 @@
   justify-content: space-between;
   flex-direction: column;
 
+  h4 {
+    font-size: 1.8vh;
+    margin: 5px 0;
+  }
+
+  .btn-game {
+    font-size: 1.5vh;
+    padding: 1vh 0.8vh;
+  }
+
   &.select-cursor {
     cursor: url(/img/crosshairs.cur), default;
   }
@@ -156,7 +166,7 @@
   &.panel {
     margin: 0;
     border-radius: 0;
-    padding: 10px 0 10px 5px;
+    padding: 5px 0;
     position: initial;
   }
 
@@ -271,19 +281,23 @@
   @cardMeasurementLg: "card-lg-@{cardMeasurement}";
   @cardMeasurementXl: "card-xl-@{cardMeasurement}";
 
+  @normalWidth: @numCards * @@cardMeasurementNm;
+  @smWidth: @numCards * @@cardMeasurementSm;
+  @lgWidth: @numCards + @@cardMeasurementLg;
+  @xlWidth: @numCards + @@cardMeasurementXl;
 
-  @{property}: @numCards * (@@cardMeasurementNm + 5px) + @additionalOffset;
+  @{property}: calc(~'@{normalWidth} + 5px + @{additionalOffset}');
 
   &.small {
-    @{property}: @numCards * (@@cardMeasurementSm + 5px) + @additionalOffset;
+    @{property}: calc(~'@{smWidth} + 5px + @{additionalOffset}');
   }
 
   &.large {
-    @{property}: @numCards * (@@cardMeasurementLg + 5px) + @additionalOffset;
+    @{property}: calc(~'@{lgWidth} + 5px) + @{additionalOffset}');
   };
 
   &.x-large {
-    @{property}: @numCards * (@@cardMeasurementXl + 5px) + @additionalOffset;
+    @{property}: calc(~'@{xlWidth} + 5px) + @{additionalOffset}');
   };
 }
 
@@ -407,7 +421,7 @@
 .inset-pane {
   display: flex;
   flex-direction: column;
-  width: 210px;
+  width: 25vh;
   justify-content: space-between;
 }
 
@@ -481,9 +495,9 @@
   background: @header-background;
   text-align: center;
   text-transform: uppercase;
-  width: 200px !important;
   position: relative;
   font-weight: bold;
+  font-size: 1.5vh;
 }
 
 span.up-arrow {
@@ -588,7 +602,7 @@ span.down-arrow {
   }
 
   height: @card-height;
-  width: (@card-width * 5) + (5 * 5);
+  width: calc(~"@{card-width}*5 + 25px");
 
   &.squish {
     width: @card-width * 5;
@@ -634,7 +648,6 @@ span.down-arrow {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 350px;
   align-items: flex-end;
   overflow: hidden;
 }

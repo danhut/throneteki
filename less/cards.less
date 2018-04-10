@@ -196,18 +196,21 @@
 }
 
 .card-large {
-  width: 220px;
-  height: 307px;
-  margin-right: 5px;
-  margin-top: 5px;
-  position: relative;
-}
+  right: 5px;
+  top: 5px;
+  position: absolute;
+  z-index: @layer-top;
+  pointer-events: none;
 
-.card-large-horizontal {
-  width: 307px;
-  height: 307px;
-  margin-right: 5px;
-  margin-top: 5px;
+  &.vertical {
+    width: @card-width * 5;
+    height: @card-height * 5;
+  }
+
+  &.horizontal {
+    width: @card-height * 5;
+    height: @card-width * 5;    
+  }
 }
 
 .card-zoomed {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import _ from 'underscore';
+import $ from 'jquery';
 
 import Card from './Card';
 
@@ -29,10 +29,10 @@ class PlayerHand extends React.Component {
         let offset = overflow / (handLength - 1);
 
         if(!this.props.isMe) {
-            cards = _.sortBy(this.props.cards, card => card.revealWhenHiddenTo);
+            cards = this.props.cards.sort((a, b) => b.revealWhenHiddenTo - a.revealWhenHiddenTo);
         }
 
-        let hand = _.map(cards, card => {
+        let hand = cards.map(card => {
             let left = (cardWidth - offset) * cardIndex++;
 
             let style = {};
@@ -53,17 +53,7 @@ class PlayerHand extends React.Component {
     }
 
     getCardWidth() {
-        switch(this.props.cardSize) {
-            case 'small':
-                return 65 * 0.8;
-            case 'large':
-                return 65 * 1.4;
-            case 'x-large':
-                return 65 * 2;
-            case 'normal':
-            default:
-                return 65;
-        }
+        return ($('.hand').width() - 25) / 5;
     }
 
     render() {
